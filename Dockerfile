@@ -18,4 +18,5 @@ WORKDIR /opt/simple-video-streamer
 COPY ./src .
 
 EXPOSE 8080/tcp
-CMD ["python3", "main.py", "--port", "8080"]
+ENTRYPOINT [ "python3", "main.py" ]
+CMD ["--port", "8080"]
