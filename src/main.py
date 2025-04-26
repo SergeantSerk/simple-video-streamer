@@ -13,9 +13,8 @@ from aiortc.contrib.media import MediaPlayer, MediaRelay
 ROOT = os.path.dirname(__file__)
 
 
-relay = None
-webcam = None
-
+relay: MediaRelay
+webcam: MediaPlayer
 
 def create_local_tracks(play_from, decode):
     global relay, webcam
@@ -105,7 +104,7 @@ async def offer(request):
     )
 
 
-pcs = set()
+pcs: set[RTCPeerConnection] = set()
 
 
 async def on_shutdown(app):
@@ -114,6 +113,11 @@ async def on_shutdown(app):
     await asyncio.gather(*coros)
     pcs.clear()
 
+    if webcam is not None:
+        if webcam.video is not None:
+            webcam.video.stop()
+        if webcam.audio is not None:
+            webcam.audio.stop()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="WebRTC webcam demo")
