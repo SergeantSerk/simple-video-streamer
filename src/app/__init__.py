@@ -10,7 +10,7 @@ from aiortc import RTCPeerConnection, RTCRtpSender, RTCSessionDescription
 from aiortc.contrib.media import MediaPlayer, MediaRelay
 
 
-class WebApp:
+class App:
     def __init__(self, play_from, video_codec: str, audio_codec: str, play_without_decoding: bool = True):
         self.relay: MediaRelay | None = None
         self.source: MediaPlayer | None = None

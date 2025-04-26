@@ -3,7 +3,7 @@ import logging
 import ssl
 
 from aiohttp import web
-from app import WebApp
+from app import App
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="WebRTC webcam demo")
@@ -45,16 +45,16 @@ if __name__ == "__main__":
     else:
         ssl_context = None
 
-    webapp = WebApp(
+    app = App(
         play_from=args.play_from,
         video_codec=args.video_codec,
         audio_codec=args.audio_codec,
         play_without_decoding=args.play_without_decoding,
     )
 
-    app = web.Application()
-    app.on_shutdown.append(webapp.on_shutdown)
-    app.router.add_get("/", webapp.index)
-    app.router.add_get("/client.js", webapp.javascript)
-    app.router.add_post("/offer", webapp.offer)
-    web.run_app(app, host=args.host, port=args.port, ssl_context=ssl_context)
+    web_app = web.Application()
+    web_app.on_shutdown.append(app.on_shutdown)
+    web_app.router.add_get("/", app.index)
+    web_app.router.add_get("/client.js", app.javascript)
+    web_app.router.add_post("/offer", app.offer)
+    web.run_app(web_app, host=args.host, port=args.port, ssl_context=ssl_context)
