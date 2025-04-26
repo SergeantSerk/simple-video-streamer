@@ -1,0 +1,2 @@
+class IncorrectCodecException(Exception):
+    pass

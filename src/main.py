@@ -3,7 +3,7 @@ import logging
 import ssl
 
 from aiohttp import web
-from webapp import WebApp
+from app import WebApp
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="WebRTC webcam demo")
