@@ -1,2 +1,2 @@
 aiohttp
-aiortc
+aiortc @ git+https://github.com/aiortc/aiortc.git@4814ca30a83a00eac244b0ef4252487db5153baf # https://github.com/aiortc/aiortc/pull/1267
