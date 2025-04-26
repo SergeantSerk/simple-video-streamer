@@ -49,7 +49,7 @@ class App:
 
         pc = RTCPeerConnection()
         self.pcs.add(pc)
-        
+
         async def on_connectionstatechange():
             print("Connection state is %s" % pc.connectionState)
             if pc.connectionState == "failed":
@@ -96,7 +96,7 @@ class App:
             return player.audio, player.video
         else:
             return self.create_local_tracks_from_live_source()
-            
+
     def create_local_tracks_from_live_source(self):
         if self.relay is None:
             config = {
@@ -110,8 +110,9 @@ class App:
             elif platform.system() == "Windows":
                 config["file"] = "video=Integrated Camera"
                 config["format"] = "dshow"
-            
-            self.source = MediaPlayer(config["file"], config["format"], self.options)
+
+            self.source = MediaPlayer(
+                config["file"], config["format"], self.options)
             self.relay = MediaRelay()
 
         if self.source is not None:
