@@ -102,7 +102,13 @@ class WebApp:
                 else:
                     self.webcam = MediaPlayer("/dev/video0", format="v4l2", options=options)
                 self.relay = MediaRelay()
-            return None, self.relay.subscribe(self.webcam.video)
+            
+            if self.webcam is not None:
+                audio = self.relay.subscribe(self.webcam.audio) if self.webcam.audio is not None else None
+                video = self.relay.subscribe(self.webcam.video) if self.webcam.video is not None else None
+                return audio, video
+            else:
+                return None, None
         
     def force_codec(self, pc, sender, forced_codec: str):
         kind = forced_codec.split("/")[0]
